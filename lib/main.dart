@@ -1,5 +1,5 @@
 import 'package:filmgoers/model/film/film_data.dart';
-import 'package:filmgoers/model/film_details.dart';
+import 'package:filmgoers/film_details.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
