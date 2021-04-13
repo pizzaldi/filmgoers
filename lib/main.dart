@@ -1,3 +1,5 @@
+import 'package:filmgoers/model/film/film_data.dart';
+import 'package:filmgoers/model/film_details.dart';
 import 'package:flutter/material.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
@@ -33,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   TMDB tmdbWithCustomLogs;
   Map result;
   List resultList;
+  List<FilmData> filmList = <FilmData>[];
 
   void _incrementCounter() {
     setState(() {
@@ -68,18 +71,22 @@ class _MyHomePageState extends State<MyHomePage> {
         child: GridView.count(
           crossAxisCount: 2,
           children: [
-            if (resultList != null)
-              for (var object in resultList)
+            if (filmList != null)
+              for (FilmData object in filmList)
                 Container(
                   padding: EdgeInsets.only(bottom: 10),
-                  // child: Text(object['title'].toString()),
-                  // Expanded(
-                  child: Image.network(
-                    'https://image.tmdb.org/t/p/w500' +
-                        object['poster_path'].toString(),
-                    // scale: 1.1,
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => FilmDetailScreen(
+                                filmData: object,
+                              )));
+                    },
+                    child: Image.network(
+                      'https://image.tmdb.org/t/p/w500' +
+                          object.posterPath.toString(),
+                    ),
                   ),
-                  // )
                 )
             else
               Container()
@@ -121,8 +128,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
     setState(() {
       resultList = result['results'];
+
+      for (int i = 0; i < resultList.length; i++) {
+        filmList.add(FilmData.fromJson(resultList[i]));
+      }
     });
 
-    print('length: ${resultList.length}, result: ${resultList.toString()}');
+    print('length: ${filmList.length}, result: ${filmList.toString()}');
   }
 }

@@ -61,4 +61,14 @@ class FilmData {
       this.voteCount,
       this.video,
       this.voteAverage);
+
+  factory FilmData.fromJson(Map<String, dynamic> json) =>
+      _$FilmDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FilmDataToJson(this);
+
+  @override
+  String toString() {
+    return 'FilmData{posterPath: $posterPath, adult: $adult, overview: $overview, releaseDate: $releaseDate, genreIds: $genreIds, id: $id, originalTitle: $originalTitle, originalLanguage: $originalLanguage, title: $title, backdropPath: $backdropPath, popularity: $popularity, voteCount: $voteCount, video: $video, voteAverage: $voteAverage}';
+  }
 }
