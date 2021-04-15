@@ -1,4 +1,4 @@
-import 'package:filmgoers/model/film/film_data.dart';
+import 'package:filmgoers/model/film/film_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class FilmDetailScreen extends StatelessWidget {
   const FilmDetailScreen({Key key, this.filmData}) : super(key: key);
 
-  final FilmData filmData;
+  final FilmModel filmData;
 
   @override
   Widget build(BuildContext context) {

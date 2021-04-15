@@ -1,6 +1,9 @@
-import 'package:filmgoers/model/film/film_data.dart';
-import 'package:filmgoers/film_details.dart';
+import 'package:filmgoers/bloc/trending_bloc/trending_bloc.dart';
+import 'package:filmgoers/model/film/film_model.dart';
+import 'package:filmgoers/model/trending/trending_model.dart';
+import 'package:filmgoers/screens/film_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
 void main() {
@@ -35,90 +38,83 @@ class _MyHomePageState extends State<MyHomePage> {
   TMDB tmdbWithCustomLogs;
   Map result;
   List resultList;
-  List<FilmData> filmList = <FilmData>[];
+  List<FilmModel> filmList = <FilmModel>[];
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  TrendingBloc trendingBloc = TrendingBloc();
+  TrendingModel trendingData;
 
   @override
   void initState() {
-    tmdbWithCustomLogs = TMDB(
-        ApiKeys(
-          'c49a31c64f8aa7d0263fac21a7a4ccd0',
-          'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNDlhMzFjNjRmOGFhN2QwMjYzZmFjMjFhN2E0Y2NkMCIsInN1YiI6IjVjOGRkOGNkOTI1MTQxMGZlYWEwNDc5NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7-aX5gHIcYFnBZQcPwQ2ytUoplFlUh4D3rNixcZnrO0',
-        ),
-        logConfig: ConfigLogger(
-          showLogs: true,
-          showErrorLogs: true,
-        ));
+    // tmdbWithCustomLogs = TMDB(
+    //     ApiKeys(
+    //       'c49a31c64f8aa7d0263fac21a7a4ccd0',
+    //       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNDlhMzFjNjRmOGFhN2QwMjYzZmFjMjFhN2E0Y2NkMCIsInN1YiI6IjVjOGRkOGNkOTI1MTQxMGZlYWEwNDc5NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7-aX5gHIcYFnBZQcPwQ2ytUoplFlUh4D3rNixcZnrO0',
+    //     ),
+    //     logConfig: ConfigLogger(
+    //       showLogs: true,
+    //       showErrorLogs: true,
+    //     ));
+    //
+    // _getTrending();
 
-    _getTrending();
+    trendingBloc.add(TrendingGetDataEvent(mediaType: 'all', timeWindow: 'day'));
 
     super.initState();
   }
 
   @override
+  void dispose() {
+    trendingBloc.close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Container(
-        // height: MediaQuery.of(context).size.height / 2,
-        child: GridView.count(
-          crossAxisCount: 2,
-          children: [
-            if (filmList != null)
-              for (FilmData object in filmList)
-                Container(
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => FilmDetailScreen(
-                                filmData: object,
-                              )));
-                    },
-                    child: Image.network(
-                      'https://image.tmdb.org/t/p/w500' +
-                          object.posterPath.toString(),
-                    ),
-                  ),
-                )
-            else
-              Container()
-          ],
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-        // child: ListView(
-        //   scrollDirection: Axis.horizontal,
-        //   children: <Widget>[
-        //     if (resultList != null)
-        //       for (var object in resultList)
-        //         Container(
-        //           padding: EdgeInsets.only(bottom: 10),
-        //           // child: Text(object['title'].toString()),
-        //           // Expanded(
-        //           child: Image.network(
-        //             'https://image.tmdb.org/t/p/w500' +
-        //                 object['poster_path'].toString(),
-        //             // scale: 1.1,
-        //           ),
-        //           // )
-        //         )
-        //     else
-        //       Container()
-        //     // for (var object in resultList) Text(object.toString())
-        //   ],
-        // ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+        body: _movieList());
+  }
+
+  Widget _movieList() {
+    return BlocBuilder(
+      value: trendingBloc,
+      builder: (BuildContext context, TrendingState state) {
+        if (state is TrendingSuccessState) {
+          if (state.result != null) {
+            trendingData = state.result;
+            return Container(
+              height: MediaQuery.of(context).size.height / 2,
+              child: GridView.count(
+                crossAxisCount: 2,
+                children: [
+                  if (trendingData.results != null)
+                    for (FilmModel object in trendingData.results)
+                      Container(
+                        padding: EdgeInsets.only(bottom: 10),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => FilmDetailScreen(
+                                      filmData: object,
+                                    )));
+                          },
+                          child: Image.network(
+                            'https://image.tmdb.org/t/p/w500' +
+                                object.posterPath.toString(),
+                          ),
+                        ),
+                      )
+                  else
+                    Container()
+                ],
+              ),
+            );
+          }
+        }
+        return Container();
+      },
     );
   }
 
@@ -130,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
       resultList = result['results'];
 
       for (int i = 0; i < resultList.length; i++) {
-        filmList.add(FilmData.fromJson(resultList[i]));
+        filmList.add(FilmModel.fromJson(resultList[i]));
       }
     });
 

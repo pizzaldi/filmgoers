@@ -27,6 +27,10 @@ dependencies:
   tmdb_api: ^1.2.4
   json_annotation: ^3.0.1
   google_fonts: ^1.1.1
+  dio: ^3.0.0
+  pretty_dio_logger: ^1.1.1
+  flutter_bloc: ^7.0.0-dev.2
+  equatable: ^1.2.6
 
 dev_dependencies:
   flutter_test:

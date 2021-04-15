@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'film_data.dart';
+part of 'film_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-FilmData _$FilmDataFromJson(Map<String, dynamic> json) {
-  return FilmData(
+FilmModel _$FilmModelFromJson(Map<String, dynamic> json) {
+  return FilmModel(
     json['poster_path'] as String,
     json['adult'] as bool,
     json['overview'] as String,
@@ -25,7 +25,7 @@ FilmData _$FilmDataFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$FilmDataToJson(FilmData instance) => <String, dynamic>{
+Map<String, dynamic> _$FilmModelToJson(FilmModel instance) => <String, dynamic>{
       'poster_path': instance.posterPath,
       'adult': instance.adult,
       'overview': instance.overview,
