@@ -1,6 +1,8 @@
 import 'package:filmgoers/bloc/trending_bloc/trending_bloc.dart';
+import 'package:filmgoers/bloc/upcoming_cubit/upcoming_cubit.dart';
 import 'package:filmgoers/model/film/film_model.dart';
 import 'package:filmgoers/model/trending/trending_model.dart';
+import 'package:filmgoers/model/upcoming/upcoming_model.dart';
 import 'package:filmgoers/screens/film_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,30 +36,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  TMDB tmdbWithCustomLogs;
-  Map result;
-  List resultList;
-  List<FilmModel> filmList = <FilmModel>[];
-
-  TrendingBloc trendingBloc = TrendingBloc();
+  TrendingBloc trendingBloc;
   TrendingModel trendingData;
+
+  UpcomingCubit upcomingCubit;
+  UpcomingModel upcomingData;
 
   @override
   void initState() {
-    // tmdbWithCustomLogs = TMDB(
-    //     ApiKeys(
-    //       'c49a31c64f8aa7d0263fac21a7a4ccd0',
-    //       'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjNDlhMzFjNjRmOGFhN2QwMjYzZmFjMjFhN2E0Y2NkMCIsInN1YiI6IjVjOGRkOGNkOTI1MTQxMGZlYWEwNDc5NyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.7-aX5gHIcYFnBZQcPwQ2ytUoplFlUh4D3rNixcZnrO0',
-    //     ),
-    //     logConfig: ConfigLogger(
-    //       showLogs: true,
-    //       showErrorLogs: true,
-    //     ));
-    //
-    // _getTrending();
+    trendingBloc = TrendingBloc()
+      ..add(TrendingGetDataEvent(mediaType: 'all', timeWindow: 'day'));
 
-    trendingBloc.add(TrendingGetDataEvent(mediaType: 'all', timeWindow: 'day'));
+    upcomingCubit = UpcomingCubit()..getUpcomingData();
 
     super.initState();
   }
@@ -85,9 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
           if (state.result != null) {
             trendingData = state.result;
             return Container(
-              height: MediaQuery.of(context).size.height / 2,
-              child: GridView.count(
-                crossAxisCount: 2,
+              height: MediaQuery.of(context).size.height / 4,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
                 children: [
                   if (trendingData.results != null)
                     for (FilmModel object in trendingData.results)
@@ -116,20 +106,5 @@ class _MyHomePageState extends State<MyHomePage> {
         return Container();
       },
     );
-  }
-
-  void _getTrending() async {
-    result = await tmdbWithCustomLogs.v3.trending
-        .getTrending(mediaType: MediaType.all, timeWindow: TimeWindow.day);
-
-    setState(() {
-      resultList = result['results'];
-
-      for (int i = 0; i < resultList.length; i++) {
-        filmList.add(FilmModel.fromJson(resultList[i]));
-      }
-    });
-
-    print('length: ${filmList.length}, result: ${filmList.toString()}');
   }
 }

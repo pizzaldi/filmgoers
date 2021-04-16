@@ -11,4 +11,8 @@ class ApiUrl {
 
   String getTrendingUrl(String mediaType, String timeWindow) =>
       baseUrl + trendingUrl(mediaType, timeWindow);
+
+  /// Get upcoming movies
+  static String upcomingUrl() => '/movie/upcoming?api_key=$apiKey';
+  String getUpcomingUrl() => baseUrl + upcomingUrl();
 }
