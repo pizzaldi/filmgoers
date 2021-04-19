@@ -23,7 +23,7 @@ class FilmDetailScreen extends StatelessWidget {
               filmData.title ?? '',
               style: GoogleFonts.staatliches(fontSize: 30.0),
             ),
-            Text(filmData.releaseDate ?? '')
+            Text(filmData.overview ?? '')
           ],
         ),
       ),
