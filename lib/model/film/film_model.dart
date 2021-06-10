@@ -46,6 +46,21 @@ class FilmModel {
   @JsonKey(name: 'vote_average')
   double voteAverage;
 
+  @JsonKey(name: 'original_country')
+  List<String> originalCountry;
+
+  @JsonKey(name: 'name')
+  String name;
+
+  @JsonKey(name: 'original_name')
+  String originalName;
+
+  @JsonKey(name: 'first_air_date')
+  String firstAirDate;
+
+  @JsonKey(name: 'media_type')
+  String mediaType;
+
   FilmModel(
       this.posterPath,
       this.adult,
@@ -60,7 +75,12 @@ class FilmModel {
       this.popularity,
       this.voteCount,
       this.video,
-      this.voteAverage);
+      this.voteAverage,
+      this.originalCountry,
+      this.name,
+      this.originalName,
+      this.firstAirDate,
+      this.mediaType);
 
   factory FilmModel.fromJson(Map<String, dynamic> json) =>
       _$FilmModelFromJson(json);
@@ -69,6 +89,6 @@ class FilmModel {
 
   @override
   String toString() {
-    return 'FilmData{posterPath: $posterPath, adult: $adult, overview: $overview, releaseDate: $releaseDate, genreIds: $genreIds, id: $id, originalTitle: $originalTitle, originalLanguage: $originalLanguage, title: $title, backdropPath: $backdropPath, popularity: $popularity, voteCount: $voteCount, video: $video, voteAverage: $voteAverage}';
+    return 'FilmModel{posterPath: $posterPath, adult: $adult, overview: $overview, releaseDate: $releaseDate, genreIds: $genreIds, id: $id, originalTitle: $originalTitle, originalLanguage: $originalLanguage, title: $title, backdropPath: $backdropPath, popularity: $popularity, voteCount: $voteCount, video: $video, voteAverage: $voteAverage, originalCountry: $originalCountry, name: $name, originalName: $originalName, firstAirDate: $firstAirDate, mediaType: $mediaType}';
   }
 }

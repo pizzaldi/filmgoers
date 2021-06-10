@@ -22,6 +22,11 @@ FilmModel _$FilmModelFromJson(Map<String, dynamic> json) {
     json['vote_count'] as int,
     json['video'] as bool,
     (json['vote_average'] as num)?.toDouble(),
+    (json['original_country'] as List)?.map((e) => e as String)?.toList(),
+    json['name'] as String,
+    json['original_name'] as String,
+    json['first_air_date'] as String,
+    json['media_type'] as String,
   );
 }
 
@@ -40,4 +45,9 @@ Map<String, dynamic> _$FilmModelToJson(FilmModel instance) => <String, dynamic>{
       'vote_count': instance.voteCount,
       'video': instance.video,
       'vote_average': instance.voteAverage,
+      'original_country': instance.originalCountry,
+      'name': instance.name,
+      'original_name': instance.originalName,
+      'first_air_date': instance.firstAirDate,
+      'media_type': instance.mediaType,
     };

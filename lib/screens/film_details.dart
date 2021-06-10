@@ -13,20 +13,45 @@ class FilmDetailScreen extends StatelessWidget {
     print('details: ${filmData.toString()}');
     return Scaffold(
       appBar: AppBar(
-        title: Text(filmData.title ?? ''),
+        title: Text(getTitle(filmData)),
       ),
       body: Container(
-        padding: EdgeInsets.all(16),
+        // padding: EdgeInsets.all(16),
         child: ListView(
           children: [
-            Text(
-              filmData.title ?? '',
-              style: GoogleFonts.staatliches(fontSize: 30.0),
+            Image.network(
+              'https://image.tmdb.org/t/p/w500' +
+                  filmData.backdropPath.toString(),
             ),
-            Text(filmData.overview ?? '')
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 16),
+              child: Text(
+                getTitle(filmData),
+                style: GoogleFonts.montserrat(
+                    fontSize: 30.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text(filmData.overview ?? ''))
           ],
         ),
       ),
     );
+  }
+
+  String getTitle(FilmModel data) {
+    // if (data.mediaType == 'movie') {
+    //   return data.title ?? '';
+    // } else if (data.mediaType == 'tv') {
+    //   return data.name ?? '';
+    // } else
+    return data.title ?? data.name ?? '';
   }
 }
