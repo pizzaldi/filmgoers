@@ -15,4 +15,8 @@ class ApiUrl {
   /// Get upcoming movies
   static String upcomingUrl() => '/movie/upcoming?api_key=$apiKey';
   String getUpcomingUrl() => baseUrl + upcomingUrl();
+
+  /// Get TV Details
+  static String tvDetailsUrl(int tvId) => '/tv/$tvId?api_key=$apiKey';
+  String getTvDetails(int tvId) => baseUrl + tvDetailsUrl(tvId);
 }
