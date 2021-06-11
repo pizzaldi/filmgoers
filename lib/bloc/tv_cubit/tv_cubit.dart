@@ -16,11 +16,14 @@ class TvCubit extends Cubit<TvState> {
       final TvDetailsModel result = await _tvDetailsApi.getTvDetails(tvId);
 
       if (result != null) {
+        print('tv details success');
         emit(TvDetailsSuccessState(result));
       } else {
+        print('tv details error 1');
         emit(TvDetailsErrorState());
       }
     } catch (e) {
+      print('tv details error 2: ${e.toString()}');
       emit(TvDetailsErrorState());
     }
   }

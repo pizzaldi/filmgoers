@@ -27,8 +27,12 @@ TvDetailsModel _$TvDetailsModelFromJson(Map<String, dynamic> json) {
     json['last_air_date'] as String,
     json['last_episode_to_air'] == null
         ? null
-        : LastEpisodeToAirModel.fromJson(
+        : EpisodeModel.fromJson(
             json['last_episode_to_air'] as Map<String, dynamic>),
+    json['next_episode_to_air'] == null
+        ? null
+        : EpisodeModel.fromJson(
+            json['next_episode_to_air'] as Map<String, dynamic>),
     (json['networks'] as List)
         ?.map((e) =>
             e == null ? null : NetworkModel.fromJson(e as Map<String, dynamic>))
@@ -81,6 +85,7 @@ Map<String, dynamic> _$TvDetailsModelToJson(TvDetailsModel instance) =>
       'languages': instance.languages,
       'last_air_date': instance.lastAirDate,
       'last_episode_to_air': instance.lastEpisodeToAir,
+      'next_episode_to_air': instance.nextEpisodeToAir,
       'networks': instance.networks,
       'number_of_episodes': instance.numberOfEpisodes,
       'number_of_seasons': instance.numberOfSeasons,

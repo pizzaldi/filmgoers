@@ -1,5 +1,5 @@
 import 'package:filmgoers/model/created_by/created_by_model.dart';
-import 'package:filmgoers/model/episode/last_episode_to_air_model.dart';
+import 'package:filmgoers/model/episode/episode_model.dart';
 import 'package:filmgoers/model/genre/genre_model.dart';
 import 'package:filmgoers/model/network/network_model.dart';
 import 'package:filmgoers/model/production/production_company_model.dart';
@@ -43,7 +43,10 @@ class TvDetailsModel {
   String lastAirDate;
 
   @JsonKey(name: 'last_episode_to_air')
-  LastEpisodeToAirModel lastEpisodeToAir;
+  EpisodeModel lastEpisodeToAir;
+
+  @JsonKey(name: 'next_episode_to_air')
+  EpisodeModel nextEpisodeToAir;
 
   @JsonKey(name: 'networks')
   List<NetworkModel> networks;
@@ -111,6 +114,7 @@ class TvDetailsModel {
       this.languages,
       this.lastAirDate,
       this.lastEpisodeToAir,
+      this.nextEpisodeToAir,
       this.networks,
       this.numberOfEpisodes,
       this.numberOfSeasons,

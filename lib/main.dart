@@ -76,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
           padding: EdgeInsets.all(8),
           child: Text(
             'Trending',
-            style: GoogleFonts.staatliches(fontSize: 30.0),
+            style: GoogleFonts.montserrat(fontSize: 30.0),
             textAlign: TextAlign.start,
           ),
         ),
@@ -84,8 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
         Container(
           padding: EdgeInsets.all(8),
           child: Text(
-            'Upcoming',
-            style: GoogleFonts.staatliches(fontSize: 30.0),
+            'Coming Soon',
+            style: GoogleFonts.montserrat(fontSize: 30.0),
             textAlign: TextAlign.start,
           ),
         ),

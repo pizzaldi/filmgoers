@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'last_episode_to_air_model.g.dart';
+part 'episode_model.g.dart';
 
 @JsonSerializable()
-class LastEpisodeToAirModel {
+class EpisodeModel {
   @JsonKey(name: 'air_date')
   String airDate;
 
@@ -23,7 +23,7 @@ class LastEpisodeToAirModel {
   String productionCode;
 
   @JsonKey(name: 'season_number')
-  String seasonNumber;
+  int seasonNumber;
 
   @JsonKey(name: 'still_path')
   String stillPath;
@@ -32,9 +32,9 @@ class LastEpisodeToAirModel {
   double voteAverage;
 
   @JsonKey(name: 'vote_count')
-  String voteCount;
+  int voteCount;
 
-  LastEpisodeToAirModel(
+  EpisodeModel(
       this.airDate,
       this.episodeNumber,
       this.id,
@@ -46,10 +46,10 @@ class LastEpisodeToAirModel {
       this.voteAverage,
       this.voteCount);
 
-  factory LastEpisodeToAirModel.fromJson(Map<String, dynamic> json) =>
-      _$LastEpisodeToAirModelFromJson(json);
+  factory EpisodeModel.fromJson(Map<String, dynamic> json) =>
+      _$EpisodeModelFromJson(json);
 
-  Map<String, dynamic> toJson() => _$LastEpisodeToAirModelToJson(this);
+  Map<String, dynamic> toJson() => _$EpisodeModelToJson(this);
 
   @override
   String toString() {
