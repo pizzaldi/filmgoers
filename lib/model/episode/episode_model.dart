@@ -55,4 +55,11 @@ class EpisodeModel {
   String toString() {
     return 'LastEpisodeToAirModel{airDate: $airDate, episodeNumber: $episodeNumber, id: $id, name: $name, overview: $overview, productionCode: $productionCode, seasonNumber: $seasonNumber, stillPath: $stillPath, voteAverage: $voteAverage, voteCount: $voteCount}';
   }
+
+  String getEpisodeNumber() {
+    if (this != null && episodeNumber != null) {
+      return episodeNumber.toString();
+    } else
+      return '';
+  }
 }

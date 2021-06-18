@@ -62,10 +62,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: _trendingSection());
+        // appBar: AppBar(
+        //   title: Text(widget.title),
+        // ),
+        body: SafeArea(child: _trendingSection()));
   }
 
   Widget _trendingSection() {
