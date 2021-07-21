@@ -32,6 +32,7 @@ dependencies:
   flutter_bloc: ^7.0.0-dev.2
   equatable: ^1.2.6
   shimmer: 1.1.2
+  rive: 0.6.8
 
 dev_dependencies:
   flutter_test:
@@ -49,6 +50,10 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/rb_1.riv
+    - assets/rb_1_v6.riv
 
   # To add assets to your application, add an assets section, like this:
   # assets:

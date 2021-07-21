@@ -5,8 +5,10 @@ import 'package:filmgoers/model/trending/trending_model.dart';
 import 'package:filmgoers/model/upcoming/upcoming_model.dart';
 import 'package:filmgoers/screens/film_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rive/rive.dart';
 import 'package:tmdb_api/tmdb_api.dart';
 
 void main() {
@@ -43,14 +45,27 @@ class _MyHomePageState extends State<MyHomePage> {
   UpcomingCubit upcomingCubit;
   UpcomingModel upcomingData;
 
+  Artboard artBoard;
+  RiveAnimationController controller;
+
   @override
   void initState() {
+    super.initState();
     trendingBloc = TrendingBloc()
       ..add(TrendingGetDataEvent(mediaType: 'all', timeWindow: 'day'));
 
     upcomingCubit = UpcomingCubit()..getUpcomingData();
 
-    super.initState();
+    rootBundle.load('assets/rb_1_v6.riv').then((data) async {
+      final riveFile = RiveFile();
+      if (riveFile.import(data)) {
+        final riveArtBoard = riveFile.mainArtboard;
+        riveArtBoard.addController(controller = SimpleAnimation('idle'));
+        setState(() {
+          artBoard = riveArtBoard;
+        });
+      }
+    });
   }
 
   @override
@@ -89,7 +104,12 @@ class _MyHomePageState extends State<MyHomePage> {
             textAlign: TextAlign.start,
           ),
         ),
-        _upcomingList()
+        _upcomingList(),
+        // Expanded(
+        //   child: Rive(
+        //     artboard: artBoard,
+        //   ),
+        // )
       ],
     );
   }
