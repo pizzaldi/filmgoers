@@ -10,7 +10,7 @@ class UpcomingApi {
   Future<UpcomingModel> getUpcoming() async {
     final Response<Map<String, dynamic>> response = await _dio.request(
       _apiUrl.getUpcomingUrl(),
-      options: RequestOptions(method: 'GET'),
+      options: Options(method: 'GET'),
     );
 
     return UpcomingModel.fromJson(response.data);

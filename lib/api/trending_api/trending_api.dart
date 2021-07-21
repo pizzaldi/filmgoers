@@ -9,11 +9,13 @@ class TrendingApi {
 
   Future<TrendingModel> getTrending(
       {String mediaType = 'all', String timeWindow = 'day'}) async {
+    print('getTrending 1');
     final Response<Map<String, dynamic>> response = await _dio.request(
       _apiUrl.getTrendingUrl(mediaType, timeWindow),
-      options: RequestOptions(method: 'GET'),
+      options: Options(method: 'GET'),
     );
 
-    return TrendingModel.fromJson(response.data);
+    print('getTrending 2');
+    return TrendingModel.fromJson(response.data!);
   }
 }

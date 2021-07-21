@@ -8,22 +8,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FilmDetailScreen extends StatefulWidget {
-  const FilmDetailScreen({Key key, this.filmData}) : super(key: key);
+  const FilmDetailScreen({Key? key, required this.filmData}) : super(key: key);
 
-  final FilmModel filmData;
+  final FilmModel? filmData;
 
   @override
   _FilmDetailScreenState createState() => _FilmDetailScreenState();
 }
 
 class _FilmDetailScreenState extends State<FilmDetailScreen> {
-  TvCubit _tvCubit;
-  TvDetailsModel tvDetailsData;
+  TvCubit? _tvCubit;
+  TvDetailsModel? tvDetailsData;
 
   @override
   void initState() {
-    if (widget.filmData.mediaType.toLowerCase() == 'tv') {
-      _tvCubit = TvCubit()..getTvDetails(widget.filmData.id);
+    if (widget.filmData!.mediaType.toLowerCase() == 'tv') {
+      _tvCubit = TvCubit()..getTvDetails(widget.filmData!.id);
     }
 
     super.initState();
@@ -34,7 +34,7 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
     print('details: ${widget.filmData.toString()}');
     return Scaffold(
       appBar: AppBar(
-        title: Text(getTitle(widget.filmData)),
+        title: Text(getTitle(widget.filmData!)),
       ),
       body: Container(
         // padding: EdgeInsets.all(16),
@@ -42,7 +42,7 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
           children: [
             Image.network(
               'https://image.tmdb.org/t/p/w500' +
-                  widget.filmData.backdropPath.toString(),
+                  widget.filmData!.backdropPath.toString(),
               fit: BoxFit.cover,
             ),
             SizedBox(
@@ -51,7 +51,7 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Text(
-                getTitle(widget.filmData),
+                getTitle(widget.filmData!),
                 style: GoogleFonts.montserrat(
                     fontSize: 30.0, fontWeight: FontWeight.bold),
               ),
@@ -61,11 +61,11 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
             ),
             Container(
                 padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Text(widget.filmData.overview ?? '')),
+                child: Text(widget.filmData!.overview ?? '')),
             SizedBox(
               height: 8,
             ),
-            if (widget.filmData.mediaType.toLowerCase() == 'tv') _tvDetails()
+            if (widget.filmData!.mediaType.toLowerCase() == 'tv') _tvDetails()
           ],
         ),
       ),
@@ -74,7 +74,7 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
 
   Widget _tvDetails() {
     return BlocBuilder<TvCubit, TvState>(
-      value: _tvCubit,
+      bloc: _tvCubit,
       builder: (BuildContext context, TvState state) {
         print('tv state: ${state.toString()}');
         if (state is TvDetailsSuccessState) {
@@ -85,8 +85,8 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  tvDetailsData.nextEpisodeToAir != null
-                      ? nextEpisodeDetail(tvDetailsData.nextEpisodeToAir)
+                  tvDetailsData!.nextEpisodeToAir != null
+                      ? nextEpisodeDetail(tvDetailsData!.nextEpisodeToAir)
                       : Container()
                   // Text(
                   //   'Next Episode',

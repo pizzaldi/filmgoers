@@ -1,4 +1,5 @@
 import 'package:filmgoers/bloc/trending_bloc/trending_bloc.dart';
+import 'package:filmgoers/bloc/trending_cubit/trending_cubit.dart';
 import 'package:filmgoers/bloc/upcoming_cubit/upcoming_cubit.dart';
 import 'package:filmgoers/model/film/film_model.dart';
 import 'package:filmgoers/model/trending/trending_model.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -39,38 +40,41 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TrendingBloc trendingBloc;
-  TrendingModel trendingData;
+  // TrendingBloc trendingBloc;
+  TrendingModel? trendingData;
 
-  UpcomingCubit upcomingCubit;
-  UpcomingModel upcomingData;
+  TrendingCubit? trendingCubit;
+  UpcomingCubit? upcomingCubit;
+  UpcomingModel? upcomingData;
 
-  Artboard artBoard;
-  RiveAnimationController controller;
+  // Artboard? artBoard;
+  // RiveAnimationController? controller;
 
   @override
   void initState() {
     super.initState();
-    trendingBloc = TrendingBloc()
-      ..add(TrendingGetDataEvent(mediaType: 'all', timeWindow: 'day'));
+    // trendingBloc = TrendingBloc()
+    //   ..add(TrendingGetDataEvent(mediaType: 'all', timeWindow: 'day'));
+
+    trendingCubit = TrendingCubit()..getTrendingData('all', 'day');
 
     upcomingCubit = UpcomingCubit()..getUpcomingData();
 
-    rootBundle.load('assets/rb_1_v6.riv').then((data) async {
-      final riveFile = RiveFile();
-      if (riveFile.import(data)) {
-        final riveArtBoard = riveFile.mainArtboard;
-        riveArtBoard.addController(controller = SimpleAnimation('idle'));
-        setState(() {
-          artBoard = riveArtBoard;
-        });
-      }
-    });
+    // rootBundle.load('assets/rb_1_v6.riv').then((data) async {
+    //   final riveFile = RiveFile();
+    //   if (riveFile.import(data)) {
+    //     final riveArtBoard = riveFile.mainArtboard;
+    //     riveArtBoard.addController(controller = SimpleAnimation('idle'));
+    //     setState(() {
+    //       artBoard = riveArtBoard;
+    //     });
+    //   }
+    // });
   }
 
   @override
   void dispose() {
-    trendingBloc.close();
+    trendingCubit?.close();
     super.dispose();
   }
 
@@ -104,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
             textAlign: TextAlign.start,
           ),
         ),
-        _upcomingList(),
+        // _upcomingList(),
         // Expanded(
         //   child: Rive(
         //     artboard: artBoard,
@@ -115,15 +119,16 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget _trendingList() {
-    return BlocBuilder(
-      value: trendingBloc,
+    return BlocBuilder<TrendingCubit, TrendingState>(
+      bloc: trendingCubit,
       builder: (BuildContext context, TrendingState state) {
+        print('trending state: ${state.toString()}');
         if (state is TrendingSuccessState) {
           if (state.result != null) {
             trendingData = state.result;
             return Container(
                 height: MediaQuery.of(context).size.height / 4,
-                child: _filmList(trendingData.results));
+                child: _filmList(trendingData!.results));
           }
         }
         return Container();
@@ -131,24 +136,25 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _upcomingList() {
-    return BlocBuilder<UpcomingCubit, UpcomingState>(
-      value: upcomingCubit,
-      builder: (BuildContext context, UpcomingState state) {
-        if (state is UpcomingSuccessState) {
-          if (state.result != null) {
-            upcomingData = state.result;
-            return Container(
-                height: MediaQuery.of(context).size.height / 4,
-                child: _filmList(upcomingData.results));
-          }
-        }
-        return Container();
-      },
-    );
-  }
+  // Widget _upcomingList() {
+  //   return BlocBuilder<UpcomingCubit, UpcomingState>(
+  //     bloc: upcomingCubit,
+  //     builder: (BuildContext context, UpcomingState state) {
+  //       print('upcoming state: ${state.toString()}');
+  //       if (state is UpcomingSuccessState) {
+  //         if (state.result != null) {
+  //           upcomingData = state.result;
+  //           return Container(
+  //               height: MediaQuery.of(context).size.height / 4,
+  //               child: _filmList(upcomingData!.results));
+  //         }
+  //       }
+  //       return Container();
+  //     },
+  //   );
+  // }
 
-  Widget _filmList(List<FilmModel> data) {
+  Widget _filmList(List<FilmModel?>? data) {
     return ListView(
       scrollDirection: Axis.horizontal,
       children: [
@@ -156,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
           width: 8,
         ),
         if (data != null)
-          for (FilmModel object in data)
+          for (FilmModel? object in data)
             Container(
               padding: EdgeInsets.only(bottom: 10, right: 8),
               child: InkWell(
@@ -170,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     borderRadius: BorderRadius.circular(8),
                     child: Image.network(
                       'https://image.tmdb.org/t/p/w500' +
-                          object.posterPath.toString(),
+                          object!.posterPath.toString(),
                     ),
                   )),
             )

@@ -24,8 +24,8 @@ class UpcomingModel {
   UpcomingModel(
       this.page, this.results, this.dates, this.totalPages, this.totalResults);
 
-  factory UpcomingModel.fromJson(Map<String, dynamic> json) =>
-      _$UpcomingModelFromJson(json);
+  factory UpcomingModel.fromJson(Map<String, dynamic>? json) =>
+      _$UpcomingModelFromJson(json!);
 
   Map<String, dynamic> toJson() => _$UpcomingModelToJson(this);
 

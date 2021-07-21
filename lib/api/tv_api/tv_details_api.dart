@@ -8,9 +8,8 @@ class TvDetailsApi {
   final ApiUrl _apiUrl = ApiUrl();
 
   Future<TvDetailsModel> getTvDetails(int tvId) async {
-    final Response<Map<String, dynamic>> response = await _dio.request(
-        _apiUrl.getTvDetails(tvId),
-        options: RequestOptions(method: 'GET'));
+    final Response<Map<String, dynamic>> response = await _dio
+        .request(_apiUrl.getTvDetails(tvId), options: Options(method: 'GET'));
 
     return TvDetailsModel.fromJson(response.data);
   }

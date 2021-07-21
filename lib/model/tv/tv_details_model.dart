@@ -134,8 +134,8 @@ class TvDetailsModel {
       this.voteAverage,
       this.voteCount);
 
-  factory TvDetailsModel.fromJson(Map<String, dynamic> json) =>
-      _$TvDetailsModelFromJson(json);
+  factory TvDetailsModel.fromJson(Map<String, dynamic>? json) =>
+      _$TvDetailsModelFromJson(json!);
 
   Map<String, dynamic> toJson() => _$TvDetailsModelToJson(this);
 

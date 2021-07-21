@@ -8,13 +8,13 @@ part of 'trending_model.dart';
 
 TrendingModel _$TrendingModelFromJson(Map<String, dynamic> json) {
   return TrendingModel(
-    json['page'] as int,
-    (json['results'] as List)
+    json['page'] as int?,
+    (json['results'] as List<dynamic>?)
         ?.map((e) =>
             e == null ? null : FilmModel.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    json['total_pages'] as int,
-    json['total_results'] as int,
+        .toList(),
+    json['total_pages'] as int?,
+    json['total_results'] as int?,
   );
 }
 

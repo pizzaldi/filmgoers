@@ -16,7 +16,7 @@ EpisodeModel _$EpisodeModelFromJson(Map<String, dynamic> json) {
     json['production_code'] as String,
     json['season_number'] as int,
     json['still_path'] as String,
-    (json['vote_average'] as num)?.toDouble(),
+    (json['vote_average'] as num).toDouble(),
     json['vote_count'] as int,
   );
 }

@@ -8,7 +8,7 @@ class UpcomingInitial extends UpcomingState {}
 class UpcomingLoadingState extends UpcomingState {}
 
 class UpcomingSuccessState extends UpcomingState {
-  final UpcomingModel result;
+  final UpcomingModel? result;
 
   UpcomingSuccessState(this.result);
 }
