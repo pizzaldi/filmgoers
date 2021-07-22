@@ -22,7 +22,7 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
 
   @override
   void initState() {
-    if (widget.filmData.mediaType.toLowerCase() == 'tv') {
+    if (_isTv(widget.filmData.mediaType)) {
       _tvCubit = TvCubit()..getTvDetails(widget.filmData.id);
     }
 
@@ -65,7 +65,7 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
             SizedBox(
               height: 8,
             ),
-            if (widget.filmData.mediaType.toLowerCase() == 'tv') _tvDetails()
+            if (_isTv(widget.filmData.mediaType)) _tvDetails()
           ],
         ),
       ),
@@ -144,5 +144,12 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
     //   return data.name ?? '';
     // } else
     return data.title ?? data.name ?? '';
+  }
+
+  bool _isTv(String mediaType) {
+    if (mediaType != null && mediaType.toLowerCase() == 'tv') {
+      return true;
+    } else
+      return false;
   }
 }
