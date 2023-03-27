@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:filmgoers/api/api_service.dart';
-import 'package:filmgoers/api/api_url.dart';
+import 'package:filmgoers/repo/api_service.dart';
+import 'package:filmgoers/repo/api_url.dart';
 import 'package:filmgoers/model/upcoming/upcoming_model.dart';
 
 class UpcomingApi {
@@ -10,9 +10,9 @@ class UpcomingApi {
   Future<UpcomingModel> getUpcoming() async {
     final Response<Map<String, dynamic>> response = await _dio.request(
       _apiUrl.getUpcomingUrl(),
-      options: RequestOptions(method: 'GET'),
+      options: Options(method: 'GET'),
     );
 
-    return UpcomingModel.fromJson(response.data);
+    return UpcomingModel.fromJson(response.data!);
   }
 }

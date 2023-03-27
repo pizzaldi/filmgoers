@@ -6,16 +6,16 @@ part 'trending_model.g.dart';
 @JsonSerializable()
 class TrendingModel {
   @JsonKey(name: 'page')
-  int page;
+  int? page;
 
   @JsonKey(name: 'results')
-  List<FilmModel> results;
+  List<FilmModel>? results;
 
   @JsonKey(name: 'total_pages')
-  int totalPages;
+  int? totalPages;
 
   @JsonKey(name: 'total_results')
-  int totalResults;
+  int? totalResults;
 
   TrendingModel(this.page, this.results, this.totalPages, this.totalResults);
 

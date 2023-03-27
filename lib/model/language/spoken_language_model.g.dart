@@ -6,13 +6,12 @@ part of 'spoken_language_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SpokenLanguageModel _$SpokenLanguageModelFromJson(Map<String, dynamic> json) {
-  return SpokenLanguageModel(
-    json['english_name'] as String,
-    json['iso_639_1'] as String,
-    json['name'] as String,
-  );
-}
+SpokenLanguageModel _$SpokenLanguageModelFromJson(Map<String, dynamic> json) =>
+    SpokenLanguageModel(
+      json['english_name'] as String?,
+      json['iso_639_1'] as String?,
+      json['name'] as String?,
+    );
 
 Map<String, dynamic> _$SpokenLanguageModelToJson(
         SpokenLanguageModel instance) =>

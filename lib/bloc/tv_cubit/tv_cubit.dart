@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:filmgoers/api/tv_api/tv_details_api.dart';
+import 'package:filmgoers/repo/tv_api/tv_details_api.dart';
 import 'package:filmgoers/model/tv/tv_details_model.dart';
 
 part 'tv_state.dart';

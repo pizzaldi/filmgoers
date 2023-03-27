@@ -5,19 +5,19 @@ part 'created_by_model.g.dart';
 @JsonSerializable()
 class CreatedByModel {
   @JsonKey(name: 'id')
-  int id;
+  int? id;
 
   @JsonKey(name: 'credit_id')
-  String creditId;
+  String? creditId;
 
   @JsonKey(name: 'name')
-  String name;
+  String? name;
 
   @JsonKey(name: 'gender')
-  int gender;
+  int? gender;
 
   @JsonKey(name: 'profile_path')
-  String profilePath;
+  String? profilePath;
 
   CreatedByModel(
       this.id, this.creditId, this.name, this.gender, this.profilePath);

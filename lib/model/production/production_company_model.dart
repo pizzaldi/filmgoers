@@ -5,16 +5,16 @@ part 'production_company_model.g.dart';
 @JsonSerializable()
 class ProductionCompanyModel {
   @JsonKey(name: 'name')
-  String name;
+  String? name;
 
   @JsonKey(name: 'id')
-  int id;
+  int? id;
 
   @JsonKey(name: 'logo_path')
-  String logoPath;
+  String? logoPath;
 
   @JsonKey(name: 'origin_country')
-  String originCountry;
+  String? originCountry;
 
   ProductionCompanyModel(this.name, this.id, this.logoPath, this.originCountry);
 

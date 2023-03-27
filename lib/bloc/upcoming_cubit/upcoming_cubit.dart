@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:filmgoers/api/upcoming_api/upcoming_api.dart';
+import 'package:filmgoers/repo/upcoming_api/upcoming_api.dart';
 import 'package:filmgoers/model/upcoming/upcoming_model.dart';
 import 'package:meta/meta.dart';
 

@@ -6,17 +6,15 @@ part of 'season_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-SeasonModel _$SeasonModelFromJson(Map<String, dynamic> json) {
-  return SeasonModel(
-    json['air_date'] as String,
-    json['episode_count'] as int,
-    json['id'] as int,
-    json['name'] as String,
-    json['overview'] as String,
-    json['poster_path'] as String,
-    json['season_number'] as int,
-  );
-}
+SeasonModel _$SeasonModelFromJson(Map<String, dynamic> json) => SeasonModel(
+      json['air_date'] as String?,
+      json['episode_count'] as int?,
+      json['id'] as int?,
+      json['name'] as String?,
+      json['overview'] as String?,
+      json['poster_path'] as String?,
+      json['season_number'] as int?,
+    );
 
 Map<String, dynamic> _$SeasonModelToJson(SeasonModel instance) =>
     <String, dynamic>{

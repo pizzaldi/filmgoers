@@ -5,10 +5,10 @@ part 'dates_model.g.dart';
 @JsonSerializable()
 class DatesModel {
   @JsonKey(name: 'maximum')
-  String maximum;
+  String? maximum;
 
   @JsonKey(name: 'minimum')
-  String minimum;
+  String? minimum;
 
   DatesModel(this.maximum, this.minimum);
 

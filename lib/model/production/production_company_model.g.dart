@@ -7,14 +7,13 @@ part of 'production_company_model.dart';
 // **************************************************************************
 
 ProductionCompanyModel _$ProductionCompanyModelFromJson(
-    Map<String, dynamic> json) {
-  return ProductionCompanyModel(
-    json['name'] as String,
-    json['id'] as int,
-    json['logo_path'] as String,
-    json['origin_country'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    ProductionCompanyModel(
+      json['name'] as String?,
+      json['id'] as int?,
+      json['logo_path'] as String?,
+      json['origin_country'] as String?,
+    );
 
 Map<String, dynamic> _$ProductionCompanyModelToJson(
         ProductionCompanyModel instance) =>

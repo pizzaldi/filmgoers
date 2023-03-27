@@ -5,25 +5,25 @@ part 'season_model.g.dart';
 @JsonSerializable()
 class SeasonModel {
   @JsonKey(name: 'air_date')
-  String airDate;
+  String? airDate;
 
   @JsonKey(name: 'episode_count')
-  int episodeCount;
+  int? episodeCount;
 
   @JsonKey(name: 'id')
-  int id;
+  int? id;
 
   @JsonKey(name: 'name')
-  String name;
+  String? name;
 
   @JsonKey(name: 'overview')
-  String overview;
+  String? overview;
 
   @JsonKey(name: 'poster_path')
-  String posterPath;
+  String? posterPath;
 
   @JsonKey(name: 'season_number')
-  int seasonNumber;
+  int? seasonNumber;
 
   SeasonModel(this.airDate, this.episodeCount, this.id, this.name,
       this.overview, this.posterPath, this.seasonNumber);

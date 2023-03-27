@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FilmDetailScreen extends StatefulWidget {
-  const FilmDetailScreen({Key key, this.filmData}) : super(key: key);
+  const FilmDetailScreen({Key? key, required this.filmData}) : super(key: key);
 
   final FilmModel filmData;
 
@@ -17,13 +17,13 @@ class FilmDetailScreen extends StatefulWidget {
 }
 
 class _FilmDetailScreenState extends State<FilmDetailScreen> {
-  TvCubit _tvCubit;
-  TvDetailsModel tvDetailsData;
+  late TvCubit _tvCubit;
+  late TvDetailsModel tvDetailsData;
 
   @override
   void initState() {
     if (_isTv(widget.filmData.mediaType)) {
-      _tvCubit = TvCubit()..getTvDetails(widget.filmData.id);
+      _tvCubit = TvCubit()..getTvDetails(widget.filmData.id!);
     }
 
     super.initState();
@@ -74,7 +74,7 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
 
   Widget _tvDetails() {
     return BlocBuilder<TvCubit, TvState>(
-      value: _tvCubit,
+      bloc: _tvCubit,
       builder: (BuildContext context, TvState state) {
         print('tv state: ${state.toString()}');
         if (state is TvDetailsSuccessState) {
@@ -112,7 +112,7 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
     );
   }
 
-  Widget nextEpisodeDetail(EpisodeModel data) {
+  Widget nextEpisodeDetail(EpisodeModel? data) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -124,11 +124,11 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
         SizedBox(
           height: 8,
         ),
-        Text('Episode ${data.getEpisodeNumber()} | Airs ${data.airDate}'),
+        Text('Episode ${data?.getEpisodeNumber()} | Airs ${data?.airDate}'),
         SizedBox(
           height: 8,
         ),
-        Text(data.name ?? 'No title'),
+        Text(data?.name ?? 'No title'),
         // Image.network(
         //   'https://image.tmdb.org/t/p/w500' +
         //       tvDetailsData.nextEpisodeToAir.stillPath.toString(),
@@ -146,7 +146,7 @@ class _FilmDetailScreenState extends State<FilmDetailScreen> {
     return data.title ?? data.name ?? '';
   }
 
-  bool _isTv(String mediaType) {
+  bool _isTv(String? mediaType) {
     if (mediaType != null && mediaType.toLowerCase() == 'tv') {
       return true;
     } else

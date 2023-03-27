@@ -6,20 +6,18 @@ part of 'episode_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-EpisodeModel _$EpisodeModelFromJson(Map<String, dynamic> json) {
-  return EpisodeModel(
-    json['air_date'] as String,
-    json['episode_number'] as int,
-    json['id'] as int,
-    json['name'] as String,
-    json['overview'] as String,
-    json['production_code'] as String,
-    json['season_number'] as int,
-    json['still_path'] as String,
-    (json['vote_average'] as num)?.toDouble(),
-    json['vote_count'] as int,
-  );
-}
+EpisodeModel _$EpisodeModelFromJson(Map<String, dynamic> json) => EpisodeModel(
+      json['air_date'] as String?,
+      json['episode_number'] as int?,
+      json['id'] as int?,
+      json['name'] as String?,
+      json['overview'] as String?,
+      json['production_code'] as String?,
+      json['season_number'] as int?,
+      json['still_path'] as String?,
+      (json['vote_average'] as num?)?.toDouble(),
+      json['vote_count'] as int?,
+    );
 
 Map<String, dynamic> _$EpisodeModelToJson(EpisodeModel instance) =>
     <String, dynamic>{

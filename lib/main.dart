@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rive/rive.dart';
-import 'package:tmdb_api/tmdb_api.dart';
+// import 'package:rive/rive.dart';
+// import 'package:tmdb_api/tmdb_api.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,23 +30,23 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TrendingBloc trendingBloc;
-  TrendingModel trendingData;
+  late TrendingBloc trendingBloc;
+  late TrendingModel trendingData;
 
-  UpcomingCubit upcomingCubit;
-  UpcomingModel upcomingData;
+  late UpcomingCubit upcomingCubit;
+  late UpcomingModel upcomingData;
 
-  Artboard artBoard;
-  RiveAnimationController controller;
+  // Artboard artBoard;
+  // RiveAnimationController controller;
 
   @override
   void initState() {
@@ -56,16 +56,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
     upcomingCubit = UpcomingCubit()..getUpcomingData();
 
-    rootBundle.load('assets/rb_1_v6.riv').then((data) async {
-      final riveFile = RiveFile();
-      if (riveFile.import(data)) {
-        final riveArtBoard = riveFile.mainArtboard;
-        riveArtBoard.addController(controller = SimpleAnimation('idle'));
-        setState(() {
-          artBoard = riveArtBoard;
-        });
-      }
-    });
+    // rootBundle.load('assets/rb_1_v6.riv').then((data) async {
+    //   final riveFile = RiveFile();
+    //   if (riveFile.import(data)) {
+    //     final riveArtBoard = riveFile.mainArtboard;
+    //     riveArtBoard.addController(controller = SimpleAnimation('idle'));
+    //     setState(() {
+    //       artBoard = riveArtBoard;
+    //     });
+    //   }
+    // });
   }
 
   @override
@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _trendingList() {
     return BlocBuilder(
-      value: trendingBloc,
+      bloc: trendingBloc,
       builder: (BuildContext context, TrendingState state) {
         if (state is TrendingSuccessState) {
           if (state.result != null) {
@@ -133,7 +133,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _upcomingList() {
     return BlocBuilder<UpcomingCubit, UpcomingState>(
-      value: upcomingCubit,
+      bloc: upcomingCubit,
       builder: (BuildContext context, UpcomingState state) {
         if (state is UpcomingSuccessState) {
           if (state.result != null) {
@@ -148,7 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _filmList(List<FilmModel> data) {
+  Widget _filmList(List<FilmModel>? data) {
     return ListView(
       scrollDirection: Axis.horizontal,
       children: [

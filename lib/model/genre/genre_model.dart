@@ -5,10 +5,10 @@ part 'genre_model.g.dart';
 @JsonSerializable()
 class GenreModel {
   @JsonKey(name: 'id')
-  int id;
+  int? id;
 
   @JsonKey(name: 'name')
-  String name;
+  String? name;
 
   GenreModel(this.id, this.name);
 

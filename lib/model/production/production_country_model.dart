@@ -5,10 +5,10 @@ part 'production_country_model.g.dart';
 @JsonSerializable()
 class ProductionCountryModel {
   @JsonKey(name: 'iso_3166_1')
-  String iso_3166_1;
+  String? iso_3166_1;
 
   @JsonKey(name: 'name')
-  String name;
+  String? name;
 
   ProductionCountryModel(this.iso_3166_1, this.name);
 

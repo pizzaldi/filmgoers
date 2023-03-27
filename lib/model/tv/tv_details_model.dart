@@ -13,94 +13,94 @@ part 'tv_details_model.g.dart';
 @JsonSerializable()
 class TvDetailsModel {
   @JsonKey(name: 'backdrop_path')
-  String backdropPath;
+  String? backdropPath;
 
   @JsonKey(name: 'created_by')
-  List<CreatedByModel> createdBy;
+  List<CreatedByModel>? createdBy;
 
   @JsonKey(name: 'episode_run_time')
-  List<int> episodeRuntime;
+  List<int>? episodeRuntime;
 
   @JsonKey(name: 'first_air_date')
-  String firstAirDate;
+  String? firstAirDate;
 
   @JsonKey(name: 'genres')
-  List<GenreModel> genres;
+  List<GenreModel>? genres;
 
   @JsonKey(name: 'homepage')
-  String homepage;
+  String? homepage;
 
   @JsonKey(name: 'id')
-  int id;
+  int? id;
 
   @JsonKey(name: 'in_production')
-  bool inProduction;
+  bool? inProduction;
 
   @JsonKey(name: 'languages')
-  List<String> languages;
+  List<String>? languages;
 
   @JsonKey(name: 'last_air_date')
-  String lastAirDate;
+  String? lastAirDate;
 
   @JsonKey(name: 'last_episode_to_air')
-  EpisodeModel lastEpisodeToAir;
+  EpisodeModel? lastEpisodeToAir;
 
   @JsonKey(name: 'next_episode_to_air')
-  EpisodeModel nextEpisodeToAir;
+  EpisodeModel? nextEpisodeToAir;
 
   @JsonKey(name: 'networks')
-  List<NetworkModel> networks;
+  List<NetworkModel>? networks;
 
   @JsonKey(name: 'number_of_episodes')
-  int numberOfEpisodes;
+  int? numberOfEpisodes;
 
   @JsonKey(name: 'number_of_seasons')
-  int numberOfSeasons;
+  int? numberOfSeasons;
 
   @JsonKey(name: 'origin_country')
-  List<String> originCountry;
+  List<String>? originCountry;
 
   @JsonKey(name: 'original_language')
-  String originalLanguage;
+  String? originalLanguage;
 
   @JsonKey(name: 'original_name')
-  String originalName;
+  String? originalName;
 
   @JsonKey(name: 'overview')
-  String overview;
+  String? overview;
 
   @JsonKey(name: 'popularity')
-  double popularity;
+  double? popularity;
 
   @JsonKey(name: 'poster_path')
-  String posterPath;
+  String? posterPath;
 
   @JsonKey(name: 'production_companies')
-  List<ProductionCompanyModel> productionCompanies;
+  List<ProductionCompanyModel>? productionCompanies;
 
   @JsonKey(name: 'production_countries')
-  List<ProductionCountryModel> productionCountries;
+  List<ProductionCountryModel>? productionCountries;
 
   @JsonKey(name: 'seasons')
-  List<SeasonModel> seasons;
+  List<SeasonModel>? seasons;
 
   @JsonKey(name: 'spoken_languages')
-  List<SpokenLanguageModel> spokenLanguages;
+  List<SpokenLanguageModel>? spokenLanguages;
 
   @JsonKey(name: 'status')
-  String status;
+  String? status;
 
   @JsonKey(name: 'tagline')
-  String tagline;
+  String? tagline;
 
   @JsonKey(name: 'type')
-  String type;
+  String? type;
 
   @JsonKey(name: 'vote_average')
-  double voteAverage;
+  double? voteAverage;
 
   @JsonKey(name: 'vote_count')
-  int voteCount;
+  int? voteCount;
 
   TvDetailsModel(
       this.backdropPath,

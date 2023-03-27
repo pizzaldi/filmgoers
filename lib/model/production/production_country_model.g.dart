@@ -7,12 +7,11 @@ part of 'production_country_model.dart';
 // **************************************************************************
 
 ProductionCountryModel _$ProductionCountryModelFromJson(
-    Map<String, dynamic> json) {
-  return ProductionCountryModel(
-    json['iso_3166_1'] as String,
-    json['name'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    ProductionCountryModel(
+      json['iso_3166_1'] as String?,
+      json['name'] as String?,
+    );
 
 Map<String, dynamic> _$ProductionCountryModelToJson(
         ProductionCountryModel instance) =>

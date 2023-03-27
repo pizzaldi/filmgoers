@@ -7,19 +7,19 @@ part 'upcoming_model.g.dart';
 @JsonSerializable()
 class UpcomingModel {
   @JsonKey(name: 'page')
-  int page;
+  int? page;
 
   @JsonKey(name: 'results')
-  List<FilmModel> results;
+  List<FilmModel>? results;
 
   @JsonKey(name: 'dates')
-  DatesModel dates;
+  DatesModel? dates;
 
   @JsonKey(name: 'total_pages')
-  int totalPages;
+  int? totalPages;
 
   @JsonKey(name: 'total_results')
-  int totalResults;
+  int? totalResults;
 
   UpcomingModel(
       this.page, this.results, this.dates, this.totalPages, this.totalResults);
